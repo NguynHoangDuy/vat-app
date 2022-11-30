@@ -49,7 +49,7 @@ btnSubmit.addEventListener("click", (e)=>{
     <p> Số tiền thuế: ${Number(Number(tienVat).toFixed(1)).toLocaleString("en")}</p>
     <p> Số tiền sau thuế: ${Number(Number(tienCoThue).toFixed(1)).toLocaleString("en")}</p>
     <span> Bằng chữ:
-        <p class="noti-money">${to_vietnamese(tienCoThue)}</p>
+        <p class="noti-money">${to_vietnamese(tienCoThue)} đồng</p>
     </span>
 </div>`
 console.log("hello")

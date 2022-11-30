@@ -100,7 +100,7 @@ input {
   font-size: 18px;
 }
 .noti-money {
-  display: inline;
+  display: inline-block;
   text-transform: lowercase;
 }
 .noti-money::first-letter {
