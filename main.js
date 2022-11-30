@@ -1,8 +1,28 @@
+function Comma(Num) { //function to add commas to textboxes
+            Num += '';
+            Num = Num.replace(',', '');
+            Num = Num.replace('.', '');
+            Num = Num.replace('.', '');
+            Num = Num.replace(',', '');
+            Num = Num.replace('.', '');
+            Num = Num.replace('.', '');
+            x = Num.split(',');
+            x1 = x[0];
+            x2 = x.length > 1 ? ',' + x[1] : '';
+            var rgx = /(\d+)(\d{3})/;
+            while (rgx.test(x1))
+                x1 = x1.replace(rgx, '$1' + ',' + '$2');
+            return x1 + x2;
+        }
 
 const btnSubmit =document.querySelector(".btn-submit")
 const money = document.querySelector(".input-number")
 const vat = document.querySelector(".vat-number")
 
+money.addEventListener("input", ()=>{
+  
+  money.value = Number(Number(money.value.replaceAll(",", "")).toFixed(1)).toLocaleString("en")
+})
 btnSubmit.addEventListener("click", (e)=>{
     if(document.querySelector(".noti"))
     {
@@ -15,19 +35,19 @@ btnSubmit.addEventListener("click", (e)=>{
     let tienVat
     if(document.getElementById("xuoi").checked == true)
     {
-        tienChuaThue = Number(money.value);
-        tienVat = tienChuaThue * 10 /100;
-        tienCoThue = Number(tienChuaThue) + Number(tienVat);
+        tienChuaThue = Number(money.value.replaceAll(",", ""));
+        tienVat = Math.round(tienChuaThue * 10 /100);
+        tienCoThue = Math.round(Number(tienChuaThue) + Number(tienVat));
     }
     else{
-        tienCoThue = Number(money.value);
+        tienCoThue = Number(money.value.replaceAll(",", ""));
         tienChuaThue = Math.round(Number(tienCoThue)*100 /  (Number(vat.value)+ 100));
         tienVat = Math.round(Number(tienCoThue) - Number(tienChuaThue));
     }
     let template = `<div class="noti">
-    <p> Số tiền chưa thuế: ${Number(Number(tienChuaThue).toFixed(1)).toLocaleString()}</p>
-    <p> Số tiền thuế: ${Number(Number(tienVat).toFixed(1)).toLocaleString()}</p>
-    <p> Số tiền sau thuế: ${Number(Number(tienCoThue).toFixed(1)).toLocaleString()}</p>
+    <p> Số tiền chưa thuế: ${Number(Number(tienChuaThue).toFixed(1)).toLocaleString("en")}</p>
+    <p> Số tiền thuế: ${Number(Number(tienVat).toFixed(1)).toLocaleString("en")}</p>
+    <p> Số tiền sau thuế: ${Number(Number(tienCoThue).toFixed(1)).toLocaleString("en")}</p>
     <span> Bằng chữ:
         <p class="noti-money">${to_vietnamese(tienCoThue)}</p>
     </span>
